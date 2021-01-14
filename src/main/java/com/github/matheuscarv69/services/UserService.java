@@ -1,6 +1,7 @@
 package com.github.matheuscarv69.services;
 
 import com.github.matheuscarv69.domain.User;
+import com.github.matheuscarv69.dto.UserDTO;
 import com.github.matheuscarv69.repository.UserRepository;
 import com.github.matheuscarv69.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,13 @@ public class UserService {
         Optional<User> user = repository.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
+
 }
